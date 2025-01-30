@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madonna and Child</title>
+    <style>
+    .canvas-container {
+        position: relative;
+        width: 600px;
+        height: 800px;
+        background: linear-gradient(#87CEEB, #E0FFFF);
+        overflow: hidden;
+    }
+    
+    .shape {
+        position: absolute;
+        transform-origin: center;
+    }
+    
+    .corner-radius-handle {
+        user-select: none;
+        touch-action: none;
+    }
+    </style>
+</head>
+<body>
+    <div class="canvas-container" id="canvas">
+        <!-- Mary's Body -->
+        <div class="shape" style="background-color: #000080; width: 200px; height: 400px; top: 200px; left: 200px; border-radius: 100px 100px 20px 20px; transform: rotate(-2deg);"></div>
+
+        <!-- Mary's Head -->
+        <div class="shape" style="background-color: #FFEBCD; width: 120px; height: 120px; top: 150px; left: 240px; border-radius: 50%;"></div>
+
+        <!-- Child Jesus -->
+        <div class="shape" style="background-color: #FFEBCD; width: 80px; height: 80px; top: 320px; left: 260px; border-radius: 50%;"></div>
+        <div class="shape" style="background-color: #800000; width: 100px; height: 150px; top: 360px; left: 250px; border-radius: 40px; transform: rotate(-10deg);"></div>
+
+        <!-- Mary's Mantle -->
+        <div class="shape" style="background-color: #000080; width: 300px; height: 200px; top: 180px; left: 150px; border-radius: 100px 100px 0 0; transform: rotate(-5deg);"></div>
+
+        <!-- Halos -->
+        <div class="shape" style="background-color: #FFD700; width: 140px; height: 140px; top: 140px; left: 230px; border-radius: 50%; opacity: 0.6;"></div>
+        <div class="shape" style="background-color: #FFD700; width: 100px; height: 100px; top: 310px; left: 250px; border-radius: 50%; opacity: 0.6;"></div>
+
+        <!-- Decorative Elements -->
+        <div class="shape" style="background-color: #FFFFFF; width: 600px; height: 100px; top: 700px; left: 0px; border-radius: 50px;"></div>
+        <div class="shape" style="color: gold; font-size: 24px; top: 180px; left: 280px; transform: rotate(-10deg);">ΜΡ ΘΥ</div>
+    </div>
+    <script>
+    document.querySelectorAll('.shape').forEach(shape => {
+        shape.onmousedown = (e) => {
+            let posX = 0, posY = 0, mouseX = e.clientX, mouseY = e.clientY;
+            document.onmousemove = (e) => {
+                e.preventDefault();
+                posX = mouseX - e.clientX;
+                posY = mouseY - e.clientY;
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                shape.style.top = (shape.offsetTop - posY) + 'px';
+                shape.style.left = (shape.offsetLeft - posX) + 'px';
+            };
+            document.onmouseup = () => {
+                document.onmousemove = null;
+                document.onmouseup = null;
+            };
+        };
+    });
+    </script>
+</body>
+</html>

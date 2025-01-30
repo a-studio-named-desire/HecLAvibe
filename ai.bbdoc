@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Concept</title>
+    <style>
+    .canvas-container {
+        position: relative;
+        width: 600px;
+        height: 600px;
+        background: #1a1a1a;
+        overflow: hidden;
+    }
+    
+    .shape {
+        position: absolute;
+        transform-origin: center;
+    }
+    </style>
+</head>
+<body>
+    <div class="canvas-container" id="canvas">
+        <!-- Central Processor -->
+        <div class="shape" style="background: radial-gradient(#00ffff, #0066ff); width: 150px; height: 150px; top: 225px; left: 225px; border-radius: 50%;"></div>
+
+        <!-- Neural Network Connections -->
+        <div class="shape" style="background: #00ff88; width: 300px; height: 8px; top: 300px; left: 150px; transform: rotate(45deg); border-radius: 4px;"></div>
+        <div class="shape" style="background: #00ff88; width: 300px; height: 8px; top: 300px; left: 150px; transform: rotate(-45deg); border-radius: 4px;"></div>
+
+        <!-- Knowledge Base -->
+        <div class="shape" style="background: rgba(255,255,255,0.1); width: 400px; height: 400px; top: 100px; left: 100px; border-radius: 50%; border: 2px dashed #ffffff;"></div>
+
+        <!-- Interface Elements -->
+        <div class="shape" style="color: white; font-size: 24px; top: 280px; left: 260px;">{ }</div>
+        <div class="shape" style="background: #ff9900; width: 80px; height: 80px; top: 260px; left: 260px; border-radius: 10px; transform: rotate(45deg); opacity: 0.3;"></div>
+
+        <!-- Data Particles -->
+        <div class="shape" style="background: #00ffff; width: 10px; height: 10px; top: 200px; left: 300px; border-radius: 50%;"></div>
+        <div class="shape" style="background: #ff00ff; width: 10px; height: 10px; top: 400px; left: 250px; border-radius: 50%;"></div>
+    </div>
+    <script>
+    document.querySelectorAll('.shape').forEach(shape => {
+        shape.onmousedown = (e) => {
+            let posX = 0, posY = 0, mouseX = e.clientX, mouseY = e.clientY;
+            document.onmousemove = (e) => {
+                e.preventDefault();
+                posX = mouseX - e.clientX;
+                posY = mouseY - e.clientY;
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                shape.style.top = (shape.offsetTop - posY) + 'px';
+                shape.style.left = (shape.offsetLeft - posX) + 'px';
+            };
+            document.onmouseup = () => {
+                document.onmousemove = null;
+                document.onmouseup = null;
+            };
+        };
+    });
+    </script>
+</body>
+</html>
